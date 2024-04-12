@@ -32,20 +32,8 @@ public class OrderService {
                         String.format(TRANSACTION_ID_PATTERN, Instant.now().toEpochMilli(), UUID.randomUUID())
                 )
                 .build();
-
         orderRepository.save(order);
-        sagaProducer.sendEvent(jsonUtil.toJson(createPayload(order)));
+        sagaProducer.sendEvent(jsonUtil.toJson(eventService.createEvent(order)));
         return order;
-    }
-
-    private Event createPayload(Order order) {
-        var event = Event.builder()
-                .orderId(order.getId())
-                .transactionId(order.getTransactionId())
-                .payload(order)
-                .createdAt(LocalDateTime.now())
-                .build();
-        eventService.save(event);
-        return event;
     }
 }

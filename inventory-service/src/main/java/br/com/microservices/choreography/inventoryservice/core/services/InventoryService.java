@@ -40,7 +40,7 @@ public class InventoryService {
             log.error("Error trying to update inventory: ", ex);
             handleFailCurrentNotExecuted(event, ex.getMessage());
         }
-        kafkaProducer.sendEvent(jsonUtil.toJson(event));
+        kafkaProducer.sendEvent(jsonUtil.toJson(event), "");
     }
 
     public void rollbackInventory(Event event) {
@@ -52,7 +52,7 @@ public class InventoryService {
         } catch (Exception ex) {
             addHistory(event, "Rollback not executed for inventory. ".concat(ex.getMessage()));
         }
-        kafkaProducer.sendEvent(jsonUtil.toJson(event));
+        kafkaProducer.sendEvent(jsonUtil.toJson(event), "");
     }
 
     private void checkCurrentValidation(Event event) {

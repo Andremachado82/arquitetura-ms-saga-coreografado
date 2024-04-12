@@ -42,7 +42,7 @@ public class PaymentService {
             log.error("Error trying to make payment: ", ex);
             handleFailCurrentNotExecuted(event, ex.getMessage());
         }
-        kafkaProducer.sendEvent(jsonUtil.toJson(event));
+        kafkaProducer.sendEvent(jsonUtil.toJson(event), "");
     }
 
     public void realizeRefund(Event event) {
@@ -54,7 +54,7 @@ public class PaymentService {
         } catch (Exception ex) {
             addHistory(event, "Rollback not executed for payment. ".concat(ex.getMessage()));
         }
-        kafkaProducer.sendEvent(jsonUtil.toJson(event));
+        kafkaProducer.sendEvent(jsonUtil.toJson(event), "");
     }
 
     private void changePaymentStatusToRefund(Event event) {
