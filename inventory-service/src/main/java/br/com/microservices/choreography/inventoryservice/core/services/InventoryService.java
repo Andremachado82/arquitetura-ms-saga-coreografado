@@ -1,8 +1,5 @@
 package br.com.microservices.choreography.inventoryservice.core.services;
 
-import br.com.microservices.choreography.inventoryservice.core.producers.KafkaProducer;
-import br.com.microservices.choreography.inventoryservice.core.repositories.InventoryRepository;
-import br.com.microservices.choreography.inventoryservice.core.repositories.OrderInventoryRepository;
 import br.com.microservices.choreography.inventoryservice.configs.exceptions.ValidationException;
 import br.com.microservices.choreography.inventoryservice.core.dtos.Event;
 import br.com.microservices.choreography.inventoryservice.core.dtos.History;
@@ -11,7 +8,9 @@ import br.com.microservices.choreography.inventoryservice.core.dtos.OrderProduct
 import br.com.microservices.choreography.inventoryservice.core.enums.ESagaStatus;
 import br.com.microservices.choreography.inventoryservice.core.models.Inventory;
 import br.com.microservices.choreography.inventoryservice.core.models.OrderInventory;
-import br.com.microservices.choreography.inventoryservice.core.utils.JsonUtil;
+import br.com.microservices.choreography.inventoryservice.core.repositories.InventoryRepository;
+import br.com.microservices.choreography.inventoryservice.core.repositories.OrderInventoryRepository;
+import br.com.microservices.choreography.inventoryservice.core.saga.SagaExecutionController;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -25,10 +24,10 @@ public class InventoryService {
 
     private static final String CURRENT_SOURCE = "INVENTORY_SERVICE";
 
-    private final JsonUtil jsonUtil;
-    private final KafkaProducer kafkaProducer;
     private final InventoryRepository inventoryRepository;
     private final OrderInventoryRepository orderInventoryRepository;
+
+    private final SagaExecutionController sagaExecutionController;
 
     public void updateInventory(Event event) {
         try {
@@ -40,7 +39,7 @@ public class InventoryService {
             log.error("Error trying to update inventory: ", ex);
             handleFailCurrentNotExecuted(event, ex.getMessage());
         }
-        kafkaProducer.sendEvent(jsonUtil.toJson(event), "");
+        sagaExecutionController.handleSaga(event);
     }
 
     public void rollbackInventory(Event event) {
@@ -52,7 +51,7 @@ public class InventoryService {
         } catch (Exception ex) {
             addHistory(event, "Rollback not executed for inventory. ".concat(ex.getMessage()));
         }
-        kafkaProducer.sendEvent(jsonUtil.toJson(event), "");
+        sagaExecutionController.handleSaga(event);
     }
 
     private void checkCurrentValidation(Event event) {
@@ -141,5 +140,4 @@ public class InventoryService {
                             event.getPayload().getId(), orderInventory.getNewQuantity(), inventory.getAvailable());
                 });
     }
-
 }

@@ -32,14 +32,14 @@ public class KafkaConfig {
     @Value("${spring.kafka.consumer.auto-offset-reset}")
     private String autoOffsetReset;
 
-    @Value("${spring.kafka.topic.payment-fail}")
-    private String paymentFailTopic;
-
     @Value("${spring.kafka.topic.inventory-success}")
     private String inventorySuccessTopic;
 
     @Value("${spring.kafka.topic.inventory-fail}")
     private String inventoryFailTopic;
+
+    @Value("${spring.kafka.topic.payment-fail}")
+    private String paymentFailTopic;
 
     @Value("${spring.kafka.topic.notify-ending}")
     private String notifyEndingTopic;

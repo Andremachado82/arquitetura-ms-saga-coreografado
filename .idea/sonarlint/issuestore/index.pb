@@ -63,3 +63,11 @@ dorder-service/src/main/java/br/com/microservices/choreography/orderservice/core
 forder-service/src/main/java/br/com/microservices/choreography/orderservice/core/documents/History.java,5/5/555194f27f79c68da03f7f71ec237a622998fdca
 ¨
 xproduct-validation-service/src/main/java/br/com/microservices/choreography/productvalidationservice/core/dtos/Event.java,e/2/e21b17f196172d63c88744145d99cdb353b15a1c
+»
+Šproduct-validation-service/src/main/java/br/com/microservices/choreography/productvalidationservice/core/saga/SagaExecutionController.java,4/b/4bd85882f32f298575388a796f89601a08d6c94f
+¥
+upayment-service/src/main/java/br/com/microservices/choreography/paymentservice/core/saga/SagaExecutionController.java,2/1/21dec0100b5a27a8d05a1335307e9dd0c26ae7df
+¡
+qorder-service/src/main/java/br/com/microservices/choreography/orderservice/core/saga/SagaExecutionController.java,7/a/7a78ca10140bda21c5b4c5fa7ceed9d7fb860f49
+©
+yinventory-service/src/main/java/br/com/microservices/choreography/inventoryservice/core/saga/SagaExecutionController.java,0/c/0cf5b15b682980b9145bcaedb9ae4be8f059aa7b

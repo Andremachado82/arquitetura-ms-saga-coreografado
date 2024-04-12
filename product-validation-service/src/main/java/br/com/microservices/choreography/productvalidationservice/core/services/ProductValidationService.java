@@ -5,10 +5,9 @@ import br.com.microservices.choreography.productvalidationservice.core.dtos.Even
 import br.com.microservices.choreography.productvalidationservice.core.dtos.History;
 import br.com.microservices.choreography.productvalidationservice.core.dtos.OrderProducts;
 import br.com.microservices.choreography.productvalidationservice.core.models.Validation;
-import br.com.microservices.choreography.productvalidationservice.core.producers.KafkaProducer;
 import br.com.microservices.choreography.productvalidationservice.core.repositories.ProductRepository;
 import br.com.microservices.choreography.productvalidationservice.core.repositories.ValidationRepository;
-import br.com.microservices.choreography.productvalidationservice.core.utils.JsonUtil;
+import br.com.microservices.choreography.productvalidationservice.core.saga.SagaExecutionController;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -25,10 +24,9 @@ public class ProductValidationService {
 
     private static final String CURRENT_SOURCE = "PRODUCT_VALIDATION_SERVICE";
 
-    private final JsonUtil jsonUtil;
-    private final KafkaProducer kafkaProducer;
     private final ProductRepository productRepository;
     private final ValidationRepository validationRepository;
+    private final SagaExecutionController sagaExecutionController;
 
     public void validateExistsProducts(Event event) {
         try {
@@ -39,7 +37,7 @@ public class ProductValidationService {
             log.error("Error trying to validate products: ", ex);
             handleFailCurrentNotExecuted(event, ex.getMessage());
         }
-        kafkaProducer.sendEvent(jsonUtil.toJson(event), "");
+        sagaExecutionController.handleSaga(event);
     }
 
     private void checkCurrentValidation(Event event) {
@@ -115,7 +113,7 @@ public class ProductValidationService {
         event.setStatus(FAIL);
         event.setSource(CURRENT_SOURCE);
         addHistory(event, "Rollback executed on product validation");
-        kafkaProducer.sendEvent(jsonUtil.toJson(event), "");
+        sagaExecutionController.handleSaga(event);
     }
 
     private void changeValidationToFail(Event event) {
@@ -126,6 +124,4 @@ public class ProductValidationService {
                 },
                 () -> createValidation(event, false));
     }
-
-
 }
