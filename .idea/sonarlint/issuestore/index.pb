@@ -71,3 +71,11 @@ upayment-service/src/main/java/br/com/microservices/choreography/paymentservice/
 qorder-service/src/main/java/br/com/microservices/choreography/orderservice/core/saga/SagaExecutionController.java,7/a/7a78ca10140bda21c5b4c5fa7ceed9d7fb860f49
 ©
 yinventory-service/src/main/java/br/com/microservices/choreography/inventoryservice/core/saga/SagaExecutionController.java,0/c/0cf5b15b682980b9145bcaedb9ae4be8f059aa7b
+ó
+gorder-service/src/main/java/br/com/microservices/choreography/orderservice/OrderServiceApplication.java,1/3/13142b0518817a4670c1aecdba18a6cadd3458fd
+Ω
+åproduct-validation-service/src/main/java/br/com/microservices/choreography/productvalidationservice/ProductValidationServiceApplication.java,5/b/5b0ff2b3e2caba4672b29742bc854b5feda9f529
+ù
+mpayment-service/src/main/java/br/com/microservices/choreography/paymentservice/PaymentServiceApplication.java,e/5/e5ff6343fea777823680f1e129e5be2108bf5283
+£
+sinventory-service/src/main/java/br/com/microservices/choreography/inventoryservice/InventoryServiceApplication.java,8/f/8f0324b3e0bc624602f5adcf3ca3b0517b29d9ff
