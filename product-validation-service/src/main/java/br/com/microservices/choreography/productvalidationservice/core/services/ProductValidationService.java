@@ -1,9 +1,9 @@
 package br.com.microservices.choreography.productvalidationservice.core.services;
 
+import br.com.microservices.choreography.productvalidationservice.configs.exceptions.ValidationException;
 import br.com.microservices.choreography.productvalidationservice.core.dtos.Event;
 import br.com.microservices.choreography.productvalidationservice.core.dtos.History;
 import br.com.microservices.choreography.productvalidationservice.core.dtos.OrderProducts;
-import br.com.microservices.choreography.productvalidationservice.configs.exceptions.ValidationException;
 import br.com.microservices.choreography.productvalidationservice.core.models.Validation;
 import br.com.microservices.choreography.productvalidationservice.core.producers.KafkaProducer;
 import br.com.microservices.choreography.productvalidationservice.core.repositories.ProductRepository;
