@@ -1,5 +1,7 @@
 Projeto: Arquitetura de Microsserviços: Padrão Saga Coreografado
 
+![Imagem Curso(1)](https://github.com/Andremachado82/arquitetura-ms-saga-coreografado/assets/49668949/81d0dcfb-8d9d-4fc5-8659-866b9572cde9)
+
 ### Sumário:
 - Tecnologias
 - Ferramentas utilizadas
@@ -34,7 +36,7 @@ Projeto: Arquitetura de Microsserviços: Padrão Saga Coreografado
     - Gradle
 ### Arquitetura Proposta
 
-
+![Arquitetura Proposta(2)](https://github.com/Andremachado82/arquitetura-ms-saga-coreografado/assets/49668949/5730d6a2-9ec4-45de-9859-79bfc1c950ed)
 
 Em nossa arquitetura, teremos 4 serviços:
 
@@ -101,7 +103,7 @@ http://localhost:3000/swagger-ui.html
 
 Você chegará nesta página:
 
-
+![Documentacao](https://github.com/Andremachado82/arquitetura-ms-saga-coreografado/assets/49668949/3e54881d-2009-474e-942e-946dc848cda0)
 
 As aplicações executarão nas seguintes portas:
 - Order-Service: 3000
@@ -121,7 +123,7 @@ Para acessar o Redpanda Console e visualizar tópicos e publicar eventos, basta 
 
 Você chegará nesta página:
 
-
+![Redpanda Kafka](https://github.com/Andremachado82/arquitetura-ms-saga-coreografado/assets/49668949/7567b3fe-0de6-4734-8c98-1c05e4d441f3)
 
 ### Dados da API
 É necessário conhecer o payload de envio ao fluxo da saga, assim como os produtos cadastrados e suas quantidades.
